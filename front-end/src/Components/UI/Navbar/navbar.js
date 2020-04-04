@@ -25,18 +25,22 @@ const NavBar = props => {
         loggedInButton = <button className="btn btn-sm btn-outline-secondary mr-sm-2" type="button"
             onClick={props.logout}>Logout</button>
         if (props.admin) {
-            navItems = <NavItem>
+            navItems = <>
+            <NavItem>
                 <NavLink className="nav-link" to="/requests" onClick={props.fetchRequests}>Requests</NavLink>
             </NavItem>
+
+                <NavItem>
+                    <NavLink className="nav-link" to="/messages" onClick={props.fetchChats}>Messages</NavLink>
+                </NavItem>
+                </>
         }
         else {
             navItems = <>
                 <NavItem>
                     <NavLink className="nav-link" to="/reservations" onClick={props.fetchReservations}>Reservations</NavLink>
                 </NavItem>
-                <NavItem>
-                    <NavLink className="nav-link" to="/messages" onClick={props.fetchChats}>Messages</NavLink>
-                </NavItem>
+
                 <NavItem>
                     <NavLink className="nav-link" to="/profile">Profile</NavLink>
                 </NavItem>

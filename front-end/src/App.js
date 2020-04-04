@@ -10,7 +10,6 @@ import { connect } from 'react-redux'
 import * as actions from './store/actions'
 import Requests from './Components/Requests/Requests'
 import Profile from './Containers/Profile/Profile'
-import Messanger from './Containers/Messanger/Messanger'
 import RealtimeSocket from './Components/RealtimeSocket'
 
 function App(props) {

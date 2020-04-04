@@ -24,6 +24,7 @@ function App(props) {
       routes = <Switch>
         <Route path='/' exact component={Home} />
         <Route path='/hospitalpage' exact component={HospitalPage} />
+        <Route path='/messages' exact component={RealtimeSocket} />
         <Route path='/requests' exact component={Requests} />
         <Redirect to="/" />
       </Switch>

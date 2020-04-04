@@ -57,44 +57,45 @@ router.get('/user/auto-login', auth, async (req, res) => {
 })
 
 router.post('/user/signup', upload.single('avatar'), async (req, res) => {
-    const userData = JSON.parse(req.body.userData)
-
-    if (req.file) {
-        const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).png().toBuffer()
-        userData.avatar = buffer
-    }
-
-    userData.age = moment().diff(moment(userData.birthday, "M/D/YYYY"), 'years')
-    const birthday = userData.birthday.split('/')
-    userData.birthday = {
-        month: parseInt(birthday[0]),
-        day: parseInt(birthday[1]),
-        year: parseInt(birthday[2]),
-    }
-
-    let user = new User(userData)
-
-    //Send A message from the Admin
-    const admin = await User.find({ email: "admin@admin.com" })
-    const newChat = new Chat({
-        messages: [
-            {
-                message: {
-                    body: "Welcome to out App !! For any help just send here.",
-                    from: admin[0]._id,
-                    to: user._id
-                }
-            }
-        ],
-        userOne_id: admin[0]._id,
-        userTwo_id: user._id,
-        lastMessage: "Welcome to out App !! For any help just send here."
-    })
-
-    user.chats.push(newChat._id)
-
     try {
-        await newChat.save()
+        const userData = JSON.parse(req.body.userData)
+
+        if (req.file) {
+            const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).png().toBuffer()
+            userData.avatar = buffer
+        }
+
+        userData.age = moment().diff(moment(userData.birthday, "M/D/YYYY"), 'years')
+        const birthday = userData.birthday.split('/')
+        userData.birthday = {
+            month: parseInt(birthday[0]),
+            day: parseInt(birthday[1]),
+            year: parseInt(birthday[2]),
+        }
+
+        let user = new User(userData)
+
+        //Send A message from the Admin
+        const admin = await User.find({ email: "admin@admin.com" })
+        if (admin) {
+            const newChat = new Chat({
+                messages: [
+                    {
+                        message: {
+                            body: "Welcome to out App !! For any help just send here.",
+                            from: admin[0]._id,
+                            to: user._id
+                        }
+                    }
+                ],
+                userOne_id: admin[0]._id,
+                userTwo_id: user._id,
+                lastMessage: "Welcome to out App !! For any help just send here."
+            })
+
+            user.chats.push(newChat._id)
+            await newChat.save()
+        }
         await user.save()
         const token = await user.GenerateAuthToken()
         user = {
@@ -313,7 +314,7 @@ router.get('/user/chatmessages/doctor/:id', auth, async (req, res) => {
                 userTwo_id: req.user._id,
                 lastMessage: "Hello ! How can I help You ? "
             })
-            
+
             userChat = newChat
             newChat = newChat.toJSON()
             newChat.userName = doctor.name
@@ -379,12 +380,12 @@ router.post('/user/chatmessages', auth, async (req, res) => {
                         }
                     },
                     {
-                    message: {
-                        from: req.user._id,
-                        to: req.body.other_id,
-                        body: req.body.message
+                        message: {
+                            from: req.user._id,
+                            to: req.body.other_id,
+                            body: req.body.message
+                        }
                     }
-                }
                 ],
                 userOne_id: req.user._id,
                 userTwo_id: req.body.other_id,

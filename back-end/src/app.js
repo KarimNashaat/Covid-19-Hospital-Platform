@@ -20,6 +20,6 @@ const server = http.createServer(app)
 const io = socketio(server)
 
 connections(io)
-app.server = server
+// app.server = server
 
-module.exports = app
+module.exports = server

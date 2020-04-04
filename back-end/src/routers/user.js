@@ -95,6 +95,8 @@ router.post('/user/signup', upload.single('avatar'), async (req, res) => {
             })
 
             user.chats.push(newChat._id)
+            admin[0].chats.push(newChat._id)
+            await admin[0].save()
             await newChat.save()
         }
         await user.save()

@@ -83,7 +83,7 @@ router.post('/user/signup', upload.single('avatar'), async (req, res) => {
                 messages: [
                     {
                         message: {
-                            body: "Welcome to out App !! For any help just send here.",
+                            body: "Welcome to our App !! For any help just send here.",
                             from: admin[0]._id,
                             to: user._id
                         }
@@ -91,7 +91,7 @@ router.post('/user/signup', upload.single('avatar'), async (req, res) => {
                 ],
                 userOne_id: admin[0]._id,
                 userTwo_id: user._id,
-                lastMessage: "Welcome to out App !! For any help just send here."
+                lastMessage: "Welcome to our App !! For any help just send here."
             })
 
             user.chats.push(newChat._id)

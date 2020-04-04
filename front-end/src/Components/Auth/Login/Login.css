@@ -1,0 +1,4 @@
+.modal-dialog > div:nth-child(1) {
+	background: transparent;
+	border: 0px;
+  }

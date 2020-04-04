@@ -40,7 +40,9 @@ const NavBar = props => {
                 <NavItem>
                     <NavLink className="nav-link" to="/reservations" onClick={props.fetchReservations}>Reservations</NavLink>
                 </NavItem>
-
+                <NavItem>
+                    <NavLink className="nav-link" to="/messages" onClick={props.fetchChats}>Messages</NavLink>
+                </NavItem>
                 <NavItem>
                     <NavLink className="nav-link" to="/profile">Profile</NavLink>
                 </NavItem>

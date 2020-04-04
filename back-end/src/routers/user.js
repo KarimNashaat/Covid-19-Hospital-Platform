@@ -77,7 +77,8 @@ router.post('/user/signup', upload.single('avatar'), async (req, res) => {
 
         //Send A message from the Admin
         const admin = await User.find({ email: "admin@admin.com" })
-        if (admin) {
+        console.log(admin)
+        if (admin.length > 0 ) {
             const newChat = new Chat({
                 messages: [
                     {

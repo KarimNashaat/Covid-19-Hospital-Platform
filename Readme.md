@@ -16,6 +16,7 @@ The functions of the platform are as follow:
   - Leave the hospitals where they are working.
   - Serve patients in the hospitals where they are working by removing them from the waiting list by order.
   - Communicate with the users through the messenger of the application.
+  
 3-There are normal Users who can:
   - Make online appointments and keep checking how many people are still before them.
   - Cancel the online appointments for any reason.
